@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Aula_api_fuel_manager</RootNamespace>
     <UserSecretsId>6451be31-f6c1-4f14-b06d-128a9fc00f98</UserSecretsId>
@@ -13,6 +13,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>
