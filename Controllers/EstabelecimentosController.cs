@@ -18,29 +18,55 @@ namespace Aula_api_fuel_manager.Controllers
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
-            var model = await _context.Estabelecimento.ToListAsync();
+            var type = await _context.Estabelecimento.ToListAsync();
 
-            return Ok(model);
+            return Ok(type);
 
         }
         [HttpPost]
-        public async Task<ActionResult> Create(Estabelecimento model)
+        public async Task<ActionResult> Create(Estabelecimento type)
         {
-            _context.Estabelecimento.Add(model); //Faz a inserção de Estabelecimentos no BD
+            _context.Estabelecimento.Add(type); //Faz a inserção de Estabelecimentos no BD
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetById", new { id = model.Id }, model);
+            return CreatedAtAction("GetById", new { id = type.Id }, type);
 
         }
         [HttpGet("{id}")]
         public async Task<ActionResult> GetById(int id)
         {
-            var model = await _context.Estabelecimento.FirstOrDefaultAsync(c => c.Id == id);
+            var type = await _context.Estabelecimento.FirstOrDefaultAsync(c => c.Id == id);
 
-            if(model == null) NotFound();  // Significa que o dado não foi encontrado
+            if (type == null) NotFound();  // Significa que o dado não foi encontrado
 
-            return Ok(model);
+            return Ok(type);
 
+        }
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Update(int id, Estabelecimento type)
+        {
+            if (id != type.Id) return BadRequest();
+
+            var typeDb = _context.Estabelecimento.AsNoTracking()
+                 .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (typeDb == null) return NotFound();
+
+            _context.Estabelecimento.Update(type);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var type = await _context.Estabelecimento.FindAsync(id);
+
+            if (type == null) NotFound();  // Significa que o dado não foi encontrado
+
+            _context.Estabelecimento.Remove(type);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }
