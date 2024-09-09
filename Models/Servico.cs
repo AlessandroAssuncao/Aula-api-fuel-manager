@@ -7,9 +7,10 @@ namespace Aula_api_fuel_manager.Models
     public class Servico
     {
         [Key]
+        public int Id { get; set; }
         [Required]
         public string NomeServico { get; set; }
-
+        
         [Required]
         public int EstablecimentoId { get; set; }
 

@@ -1,6 +1,8 @@
 
 using Aula_api_fuel_manager.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
+using System.Json.Serialization;
 
 namespace Aula_api_fuel_manager
 {
