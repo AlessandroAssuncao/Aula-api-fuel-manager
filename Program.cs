@@ -2,7 +2,8 @@
 using Aula_api_fuel_manager.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
-using System.Json.Serialization;
+using System.Text.Json.Serialization;
+
 
 namespace Aula_api_fuel_manager
 {
@@ -14,7 +15,8 @@ namespace Aula_api_fuel_manager
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
             builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder
                 .Configuration.GetConnectionString("DefaultConnection")));

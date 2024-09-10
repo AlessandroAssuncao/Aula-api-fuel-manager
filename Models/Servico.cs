@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Aula_api_fuel_manager.Models
 {
     [Table("Servicos")]
-    public class Servico
+    public class Servico : LinksHateos
     {
         [Key]
         public int Id { get; set; }

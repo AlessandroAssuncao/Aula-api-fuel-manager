@@ -36,11 +36,12 @@ namespace Aula_api_fuel_manager.Controllers
         public async Task<ActionResult> GetById(int id)
         {
             var type = await _context.Estabelecimento
-                .Include(t => t.Servicos)
+                .Include(t => t.Servicos)// recupera os serviços do estabelecimento especifico
                 .FirstOrDefaultAsync(c => c.Id == id);
 
             if (type == null) return NotFound();  // Significa que o dado não foi encontrado
 
+            GerarLinks(type);
             return Ok(type);
 
         }
@@ -63,12 +64,18 @@ namespace Aula_api_fuel_manager.Controllers
         {
             var type = await _context.Estabelecimento.FindAsync(id);
 
-            if (type == null) return NotFound();  // Significa que o dado não foi encontrado
+            if (type == null) return NotFound();  
 
             _context.Estabelecimento.Remove(type);
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+        private void GerarLinks(Estabelecimento type)
+        {
+            type.Links.Add(new LinkDto(type.Id, Url.ActionLink(), rel : "self", metodo: "GET"));
+            type.Links.Add(new LinkDto(type.Id, Url.ActionLink(), rel: "update", metodo: "PUT"));
+            type.Links.Add(new LinkDto(type.Id, Url.ActionLink(), rel: "delete", metodo: "Delete"));
         }
     }
 }
