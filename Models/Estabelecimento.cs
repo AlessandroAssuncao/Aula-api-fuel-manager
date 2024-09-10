@@ -19,5 +19,9 @@ namespace Aula_api_fuel_manager.Models
         [Required]
         public DateTime Data { get; set; }
         public ICollection<Servico> Servicos { get; set; }
+
+       
+        //public ICollection<EstabelecimentoUsuarios> Usuarios { get; set; }
+
     }
 }
